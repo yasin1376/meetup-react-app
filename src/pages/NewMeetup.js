@@ -1,6 +1,8 @@
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 const NewMeetup = () => {
+  const navigate = useNavigate();
   const titleInput = useRef();
   const imageInput = useRef();
   const addressInput = useRef();
@@ -14,6 +16,17 @@ const NewMeetup = () => {
       address: addressInput.current.value,
       description: descriptionInput.current.value,
     };
+
+    fetch(
+      "https://react-meetup-app-4e702-default-rtdb.firebaseio.com/meetups.json",
+      {
+        method: "POST",
+        body: JSON.stringify(meetupData),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    ).then(() => navigate("/"));
 
     console.log(meetupData);
   };
