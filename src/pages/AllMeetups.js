@@ -20,22 +20,24 @@ const AllMeetups = () => {
           };
           meetups.push(meetup);
         }
+        console.log(meetups);
         setIsLoading(false);
-        setLoadedMeetups(data);
+        setLoadedMeetups(meetups);
       });
   }, []);
 
-  if (isLoading) {
-    return (
-      <div>
-        <p>Loading ...</p>
-      </div>
-    );
-  }
-
   return (
-    <div>
+    <div className="w-2/3 sm:w-1/2 md:w-1/2 mx-auto mt-5">
       <h1>All Meetups</h1>
+      {isLoading ? (
+        <p>Loading ...</p>
+      ) : (
+        <ul>
+          {loadedMeetups.map((meetup) => {
+            return <li key={meetup.id}>{meetup.title}</li>;
+          })}
+        </ul>
+      )}
     </div>
   );
 };
