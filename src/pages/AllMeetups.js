@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import MeetupItem from "../components/MeetupItem";
 
 const AllMeetups = () => {
   const [isLoading, setIsLoading] = useState(true);
@@ -28,13 +29,12 @@ const AllMeetups = () => {
 
   return (
     <div className="w-2/3 sm:w-1/2 md:w-1/2 mx-auto mt-5">
-      <h1>All Meetups</h1>
       {isLoading ? (
         <p>Loading ...</p>
       ) : (
         <ul>
           {loadedMeetups.map((meetup) => {
-            return <li key={meetup.id}>{meetup.title}</li>;
+            return <MeetupItem key={meetup.id} meetup={meetup} />;
           })}
         </ul>
       )}
